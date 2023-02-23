@@ -30,9 +30,21 @@ public interface Queue {
 
     Iterator iterator();
 
-    Queue filter (Predicate predicate);
+    default Queue filter (Predicate predicate){
+        Queue queue = createEmptyQueue();
+        Iterator iterator = iterator();
+        while (iterator.hasNext()){
+            Object tmp = iterator.next();
+            if(predicate.test(tmp)){
+                queue.enqueue(tmp);
+            }
+        }
+        return null;
+    }
 
     Queue createEmptyQueue();
+
+
 
 
 

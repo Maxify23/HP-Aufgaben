@@ -97,19 +97,41 @@ public class QueueByArray implements Queue {
         }
     }
 
-    @Override
-    public Iterator iterator() {
-        return null;
+    private class ArrayIterator implements Iterator {
+        int Iterator = 0;
+
+        @Override
+        public boolean hasNext() {
+            return Iterator < count;
+        }
+
+        @Override
+        public Object next() {
+            return elements[Iterator++];
+        }
     }
 
     @Override
-    public Queue filter(Predicate predicate) {
-        return null;
+    public Iterator iterator() {
+        return new ArrayIterator();
     }
 
     @Override
     public Queue createEmptyQueue() {
-        return null;
+        return new QueueByArray();
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i<=count; i++){
+            sb.append(elements[i]);
+            if (i < count){
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
 
